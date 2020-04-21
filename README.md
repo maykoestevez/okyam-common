@@ -1,2 +1,2 @@
 # okyam-common
-Common library 
+Angular Common library 
