@@ -1,5 +1,4 @@
 <div class="input-group rightsearch right">
-
     <nz-input-group [nzSuffix]="inputClearTpl">
         <input
             type="text"
@@ -18,16 +17,4 @@
             (click)="clearSearch()"></i>
             <i *ngIf="!search" nz-icon nzType="search"></i>
     </ng-template>
-
-    <!-- <span class="right">
-      <a class="btn-flat waves-effect waves-light btn-floating" id="button-search" (click)="clearSearch()">
-          <i class="material-icons black-text" id="search-icon">search</i>
-      </a>
-  </span>
-  <input type="text" id="searchInput" clas="black-text"
-         name="search"
-         [(ngModel)]="search" class="form-control"
-         (input)="filter()"
-         placeholder="Buscar" style="display: initial;"
-         (ngModelChange)="changeIcon('search-icon','clear')"> -->
 </div>

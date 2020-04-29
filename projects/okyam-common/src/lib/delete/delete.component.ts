@@ -4,66 +4,37 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'ok-delete',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  templateUrl: './delete.component.html',
+  styleUrls: ['./delete.component.css']
 })
-export class DeleteComponent {
+export class DeleteComponent implements OnInit {
 
-
-  //ng zorro confirm modal
-  confirmModal: NzModalRef; // For testing by now
+  confirmModal: NzModalRef;
+  @Input() openModal = new Subject<string>();
+  @Input() deleteAction = new Subject<any>();
+  @Input() closeModal = new Subject<any>();
 
   constructor(private modal: NzModalService) { }
+
+  public ngOnInit() {
+    this.openModal.subscribe(event => this.showConfirm(event));
+    this.closeModal.subscribe(() => this.hideModal());
+  }
 
   showConfirm(itemToDelete: string): void {
     this.confirmModal = this.modal.confirm({
       nzTitle: 'Eliminar',
       nzContent: `Quieres eliminar ${itemToDelete}?`,
-      nzOnOk: () =>
-        new Promise((resolve, reject) => {
-          resolve(() => {
-
-            this.deleteItem.next();
-            this.deleteItem.subscribe(() => {
-
-            })
-
-          }),
-            reject(() => {
-
-            });
-          //setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-        }).catch(() => console.log('Oops errors!'))
+      nzOnOk: () => {
+        this.deleteAction.next();
+        this.confirmModal.getInstance().nzOkLoading = true;
+        return false;
+      }
     });
-  }
-
-  name: string;
-  @Input() modalId: string;
-  @Input() openModal: Subject<string>;
-  @Output() deleteItem = new Subject<any>();
-  @Output() closeModal = new EventEmitter<any>();
-
-  public ngOnInit() {
-
-
-    this.openModal.subscribe(event => {
-      this.showConfirm(event);
-    });
-
   }
 
   public hideModal() {
+    this.confirmModal.getInstance().nzOkLoading = false;
     this.confirmModal.close();
   }
-  public delete() {
-
-    //this.deleteItem.emit();
-    this.hideModal();
-  }
-
-  public close() {
-    this.hideModal();
-    this.closeModal.emit();
-  }
-
 }

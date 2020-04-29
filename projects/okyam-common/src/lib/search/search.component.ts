@@ -8,7 +8,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class SearchComponent {
 
   @Input() fieldTosearch = 'description';
-
   @Output() searchEvent = new EventEmitter<any>();
   @Output() clearSearchEvent = new EventEmitter<any>();
 
@@ -36,20 +35,14 @@ export class SearchComponent {
   }
 
   public filter() {
-
     if (this.search === '') {
-
       this.setToFullList();
-
     } else {
-
       this.filtered = this.list
         .filter(item => item[this.fieldTosearch].toLowerCase()
           .indexOf(this.search.toLowerCase()) !== -1);
-
       this.searchEvent.emit(this.filtered);
     }
-
   }
 
   public setToFullList() {

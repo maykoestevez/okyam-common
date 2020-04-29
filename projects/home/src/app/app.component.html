@@ -13,9 +13,10 @@
     </nz-steps>
     <p></p>
     <button
+        (click)="openDeleteModal()"
         nz-button
         nzType="primary">
-        Primary
+        Delete Item
     </button>
     <button
         nz-button
@@ -39,21 +40,45 @@
     </button>
     <p></p>
     <div class="icons-list">
-      <i nz-icon [nzType]="'home'" [nzTheme]="'twotone'"></i>
-      <i nz-icon [nzType]="'setting'" [nzTheme]="'fill'"></i>
-      <i nz-icon [nzType]="'smile'" [nzTheme]="'outline'"></i>
-      <i nz-icon [nzType]="'sync'" [nzSpin]="true"></i>
-      <i nz-icon [nzType]="'smile'" [nzTheme]="'outline'" [nzRotate]="180"></i>
-      <!-- Loading with new API would spin automatically! -->
-      <i nz-icon [nzType]="'loading'"></i>
+        <i
+            nz-icon
+            [nzType]="'home'"
+            [nzTheme]="'twotone'"></i>
+        <i
+            nz-icon
+            [nzType]="'setting'"
+            [nzTheme]="'fill'"></i>
+        <i
+            nz-icon
+            [nzType]="'smile'"
+            [nzTheme]="'outline'"></i>
+        <i
+            nz-icon
+            [nzType]="'sync'"
+            [nzSpin]="true"></i>
+        <i
+            nz-icon
+            [nzType]="'smile'"
+            [nzTheme]="'outline'"
+            [nzRotate]="180"></i>
+        <!-- Loading with new API would spin automatically! -->
+        <i
+            nz-icon
+            [nzType]="'loading'"></i>
     </div>
 
-    <ok-search [list]="filteredNames" (clearSearchEvent)="clearSearch()" (searchEvent)="filterList($event)"></ok-search>
+    <ok-search
+        [list]="filteredNames"
+        (clearSearchEvent)="clearSearch()"
+        (searchEvent)="filterList($event)"></ok-search>
     <ul>
-        <li *ngFor="let name of filteredNames"> {{name.description}}</li>
+        <li *ngFor="let name of filteredNames">{{name.description}}</li>
     </ul>
 </div>
 
-
+<ok-delete
+    [openModal]="openModal"
+    [deleteAction]="deleteItem"
+    [closeModal]="hideModal"></ok-delete>
 
 <router-outlet></router-outlet>

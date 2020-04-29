@@ -6,17 +6,18 @@ import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { SearchComponent } from './search/search.component';
+import { DeleteComponent } from './delete/delete.component';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [SearchComponent],
+  declarations: [SearchComponent, DeleteComponent],
   imports: [
     NgZorroAntdModule,
     FormsModule,
     CommonModule
   ],
-  exports: [NgZorroAntdModule, SearchComponent],
+  exports: [NgZorroAntdModule, SearchComponent, DeleteComponent],
   providers: [
     { provide: NZ_I18N, useValue: en_US }
   ]

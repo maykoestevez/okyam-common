@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { Subject, interval } from 'rxjs';
 
 
 @Component({
@@ -8,6 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
+  openModal = new Subject<string>();
+  deleteItem = new Subject<any>();
+  hideModal = new Subject<any>();
+
   title = 'home';
   allNames = [
     { name: 'Pedro', description: 'Nuevo jefe' },
@@ -16,7 +21,17 @@ export class AppComponent implements OnInit {
   ];
   filteredNames: any;
 
+  openDeleteModal() {
+    this.openModal.next('Delete Mayko Item');
+  }
+
+
   ngOnInit(): void {
+    this.deleteItem.subscribe(() => {
+      setTimeout(() => {
+        this.hideModal.next();
+      }, 1000);
+    });
     this.filteredNames = this.allNames;
   }
 
